@@ -24,6 +24,10 @@ public class EnvVisualizer {
         this.title = title;
     }
 
+    public EnvVisualizer(GridEnvironment env, VisualizerParameters params) {
+        this(env, params.title(), params.window_x(), params.window_y(), params.width(), params.height());
+    }
+
     public void init() {
         JPanel panel = new JPanel() {
             protected void paintComponent(Graphics g) {

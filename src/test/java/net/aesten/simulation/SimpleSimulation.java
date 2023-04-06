@@ -21,6 +21,7 @@ public class SimpleSimulation extends Simulation{
         obstacles = new ArrayList<>();
     }
 
+    @Override
     public void addComponent(Component component) throws SimulationException {
         env.addComponent(component);
         if (component instanceof Robot robot) {
@@ -30,10 +31,12 @@ public class SimpleSimulation extends Simulation{
         }
     }
 
+    @Override
     public void removeComponent(Component component) {
 
     }
 
+    @Override
     public void step() {
         robots.forEach( robot -> {
             List<Cell> cells = robot.perceive(env);
