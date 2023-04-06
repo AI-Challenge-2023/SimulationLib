@@ -2,7 +2,6 @@ package net.aesten.simulation.component;
 
 import net.aesten.simulation.data.Orientation;
 import net.aesten.simulation.data.Position;
-import net.aesten.simulation.environment.Cell;
 import net.aesten.simulation.environment.GridEnvironment;
 import net.aesten.simulation.exceptions.SimulationException;
 
@@ -40,11 +39,11 @@ public class Robot extends Component {
         }
     }
 
-    public boolean checkNextCell(GridEnvironment env) {
+    public boolean canMoveForward(GridEnvironment env) {
         if (env.isInGrid(position.x() + orientation.x_dir, position.y() + orientation.y_dir)) {
             try {
-                Cell cell = env.getCellAt(position.x() + orientation.x_dir, position.y() + orientation.y_dir);
-                if (cell.getComponent() instanceof NonBlockingComponent) return true;
+                Component component = env.getComponentAt(position.x() + orientation.x_dir, position.y() + orientation.y_dir);
+                if (component instanceof NonBlockingComponent) return true;
             } catch (SimulationException e) {
                 e.printStackTrace();
             }
@@ -58,7 +57,7 @@ public class Robot extends Component {
         env.moveComponent(this, x_to, y_to);
     }
 
-    public List<Cell> perceive(GridEnvironment env) {
-        return env.getCellsAround(position.x(), position.y(), perceptionRadius);
+    public List<Component> perceive(GridEnvironment env) {
+        return env.getComponentsAround(position.x(), position.y(), perceptionRadius);
     }
 }

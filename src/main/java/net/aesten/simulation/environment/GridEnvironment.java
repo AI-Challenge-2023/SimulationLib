@@ -9,18 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GridEnvironment {
-    private final Cell[][] grid;
+    private final Component[][] grid;
     private final int rows;
     private final int columns;
 
     public GridEnvironment(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
-        this.grid = new Cell[rows][columns];
+        this.grid = new Component[rows][columns];
 
         for (int i = 0 ; i < rows ; i++) {
             for (int j = 0 ; j < rows ; j++) {
-                grid[i][j] = new Cell(new Air(i, j));
+                grid[i][j] = new Air(i, j);
             }
         }
     }
@@ -37,10 +37,10 @@ public class GridEnvironment {
         int x = component.getPosition().x();
         int y = component.getPosition().y();
 
-        if (x >= rows || y >= columns || x < 0 || y < 0 || !(grid[x][y].getComponent() instanceof Air)) {
+        if (x >= rows || y >= columns || x < 0 || y < 0 || !(grid[x][y] instanceof Air)) {
             throw new SimulationException("Could not add component to simulation env");
         } else {
-            grid[x][y] = new Cell(component);
+            grid[x][y] = component;
         }
     }
 
@@ -52,26 +52,26 @@ public class GridEnvironment {
         if (component.getPosition() == null) return;
         int x = component.getPosition().x();
         int y = component.getPosition().y();
-        grid[x][y] = new Cell(new Air(x, y));
+        grid[x][y] = new Air(x, y);
         component.setPosition(new Position(x_to, y_to));
-        grid[x_to][y_to] = new Cell(component);
+        grid[x_to][y_to] = component;
     }
 
-    public Cell getCellAt(int x, int y) throws SimulationException {
+    public Component getComponentAt(int x, int y) throws SimulationException {
         try {
             return grid[x][y];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new SimulationException("Tried to fetch cell outside simulation range");
+            throw new SimulationException("Tried to fetch position outside simulation range");
         }
     }
 
-    public List<Cell> getCellsAround(int x, int y, int radius) {
-        List<Cell> cells = new ArrayList<>();
+    public List<Component> getComponentsAround(int x, int y, int radius) {
+        List<Component> components = new ArrayList<>();
         for (int i = Math.max(0, x - radius) ; i < Math.min(x + radius, rows) ; i++) {
             for (int j = Math.max(0, y - radius) ; i < Math.min(y + radius, columns) ; i++) {
-                cells.add(grid[i][j]);
+                components.add(grid[i][j]);
             }
         }
-        return cells;
+        return components;
     }
 }
