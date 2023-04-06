@@ -56,7 +56,6 @@ public class Robot extends Component {
         int x_to = position.x() + orientation.x_dir;
         int y_to = position.y() + orientation.y_dir;
         env.moveComponent(this, x_to, y_to);
-        System.out.println("Robot " + getId() + " moved to (" + x_to + ", " + y_to + ")");
     }
 
     public List<Cell> perceive(GridEnvironment env) {

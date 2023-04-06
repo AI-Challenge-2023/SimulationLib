@@ -16,7 +16,6 @@ public class SimpleSimulation extends Simulation{
     private final List<Obstacle> obstacles;
     public SimpleSimulation(GridEnvironment env, EnvVisualizer window) {
         super(env, window);
-        super.window.init();
         robots = new ArrayList<>();
         obstacles = new ArrayList<>();
     }

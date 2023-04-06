@@ -13,6 +13,7 @@ public abstract class Simulation {
     public Simulation(GridEnvironment env, EnvVisualizer window) {
         this.env = env;
         this.window = window;
+        this.window.init();
     }
 
     public Simulation(GridEnvironment env, VisualizerParameters params) {
