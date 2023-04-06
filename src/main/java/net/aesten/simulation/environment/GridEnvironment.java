@@ -19,7 +19,7 @@ public class GridEnvironment {
         this.grid = new Component[rows][columns];
 
         for (int i = 0 ; i < rows ; i++) {
-            for (int j = 0 ; j < rows ; j++) {
+            for (int j = 0 ; j < columns ; j++) {
                 grid[i][j] = new Air(i, j);
             }
         }
