@@ -39,7 +39,7 @@ public class EnvVisualizer {
                 for (int row = 0; row < EnvVisualizer.this.env.getRows(); ++row) {
                     for (int col = 0; col < EnvVisualizer.this.env.getColumns(); ++col) {
                         try {
-                            g.setColor(EnvVisualizer.this.env.getCellAt(row, col).getComponent().getColor());
+                            g.setColor(EnvVisualizer.this.env.getComponentAt(row, col).getColor());
                             g.fillRect(col * x_ratio, row * y_ratio, x_ratio, y_ratio);
                         } catch (SimulationException e) {
                             e.printStackTrace();

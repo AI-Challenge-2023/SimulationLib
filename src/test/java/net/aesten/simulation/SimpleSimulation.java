@@ -3,7 +3,6 @@ package net.aesten.simulation;
 import net.aesten.simulation.component.Component;
 import net.aesten.simulation.component.Robot;
 import net.aesten.simulation.component.Obstacle;
-import net.aesten.simulation.environment.Cell;
 import net.aesten.simulation.environment.GridEnvironment;
 import net.aesten.simulation.exceptions.SimulationException;
 import net.aesten.simulation.visual.EnvVisualizer;
@@ -38,14 +37,14 @@ public class SimpleSimulation extends Simulation{
     @Override
     public void step() {
         robots.forEach( robot -> {
-            List<Cell> cells = robot.perceive(env);
-            cells.stream().map(Cell::getComponent).forEach( component -> {
+            List<Component> components = robot.perceive(env);
+            components.forEach( component -> {
                 if (component instanceof Robot other && other.getId() != robot.getId())
                     System.out.println("Robot " + robot.getId() + " perceived robot " + other.getId());
             });
             int i = 0;
             while (i < 4) {
-                if (robot.checkNextCell(env)) {
+                if (robot.canMoveForward(env)) {
                     robot.moveForward(env);
                     i = 4;
                 } else {

@@ -1,5 +1,6 @@
 package net.aesten.simulation;
 
+import net.aesten.simulation.component.Obstacle;
 import net.aesten.simulation.component.Robot;
 import net.aesten.simulation.data.Orientation;
 import net.aesten.simulation.environment.GridEnvironment;
@@ -24,12 +25,12 @@ public class SimpleSimulationTest {
 
         r1.setColor(Color.CYAN);
 
-        SimpleObstacle o1 = new SimpleObstacle(14,12, Color.YELLOW, "yellow");
-        SimpleObstacle o2 = new SimpleObstacle(3,5, Color.BLACK, "black");
-        SimpleObstacle o3 = new SimpleObstacle(8,6, Color.RED, "red");
-        SimpleObstacle o4 = new SimpleObstacle(5,7, Color.GRAY, "gray");
-        SimpleObstacle o5 = new SimpleObstacle(7,14, Color.PINK, "pink");
-        SimpleObstacle o6 = new SimpleObstacle(12,4, Color.BLACK, "black");
+        Obstacle o1 = new Obstacle(14,12, Color.YELLOW);
+        Obstacle o2 = new Obstacle(3,5, Color.BLACK);
+        Obstacle o3 = new Obstacle(8,6, Color.RED);
+        Obstacle o4 = new Obstacle(5,7, Color.GRAY);
+        Obstacle o5 = new Obstacle(7,14, Color.PINK);
+        Obstacle o6 = new Obstacle(12,4, Color.BLACK);
 
         sim.addComponent(r1);
         sim.addComponent(r2);
