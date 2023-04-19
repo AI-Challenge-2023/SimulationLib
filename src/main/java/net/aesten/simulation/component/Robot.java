@@ -12,6 +12,7 @@ public class Robot extends Component {
     private static int inc = 1;
     private static int perceptionRadius = 2;
     private Orientation orientation;
+    private int[] plannedDestination;
 
     public Robot(int x, int y, Color color) {
         super(inc++, new Position(x, y), color);
@@ -55,6 +56,21 @@ public class Robot extends Component {
         int x_to = position.x() + orientation.x_dir;
         int y_to = position.y() + orientation.y_dir;
         env.moveComponent(this, x_to, y_to);
+    }
+
+    public void planDestination(Orientation orientation) {
+        planDestination(position.x() + orientation.x_dir, position.y() + orientation.y_dir);
+    }
+
+    public void planDestination(int x_to, int y_to) {
+        plannedDestination = new int[]{x_to, y_to};
+    }
+
+    public void executePlan(GridEnvironment env) {
+        if (plannedDestination != null) {
+            env.moveComponent(this, plannedDestination[0], plannedDestination[1]);
+            plannedDestination = null;
+        }
     }
 
     public List<Component> perceive(GridEnvironment env) {
