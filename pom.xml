@@ -20,6 +20,13 @@
     </dependency>
   </dependencies>
 
+  <distributionManagement>
+    <repository>
+      <id>azalea-repo</id>
+      <url>https://azalealibrary.net/releases</url>
+    </repository>
+  </distributionManagement>
+
   <build>
     <plugins>
       <plugin>
