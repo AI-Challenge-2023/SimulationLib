@@ -48,13 +48,17 @@ public class GridEnvironment {
         return (x >= 0 && x < rows && y >= 0 && y < columns);
     }
 
-    public void moveComponent(Component component, int x_to, int y_to) {
-        if (component.getPosition() == null) return;
-        int x = component.getPosition().x();
-        int y = component.getPosition().y();
-        grid[x][y] = new Air(x, y);
-        component.setPosition(new Position(x_to, y_to));
-        grid[x_to][y_to] = component;
+    public Component moveComponent(Component movingComponent, int x_to, int y_to, Component replacedComponent) {
+        if (movingComponent.getPosition() == null) return null;
+        int x = movingComponent.getPosition().x();
+        int y = movingComponent.getPosition().y();
+        if (replacedComponent != null) {
+            grid[x][y] = replacedComponent;
+        }
+        movingComponent.setPosition(new Position(x_to, y_to));
+        Component previousComponent = grid[x_to][y_to];
+        grid[x_to][y_to] = movingComponent;
+        return previousComponent;
     }
 
     public Component getComponentAt(int x, int y) throws SimulationException {

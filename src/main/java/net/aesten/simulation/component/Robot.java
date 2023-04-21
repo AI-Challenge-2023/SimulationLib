@@ -12,6 +12,7 @@ public class Robot extends Component {
     private static int inc = 1;
     private static int perceptionRadius = 2;
     private Orientation orientation;
+    private Component replacedComponent = null;
     private int[] plannedDestination;
 
     public Robot(int x, int y, Color color) {
@@ -55,7 +56,7 @@ public class Robot extends Component {
     public void moveForward(GridEnvironment env) {
         int x_to = position.x() + orientation.x_dir;
         int y_to = position.y() + orientation.y_dir;
-        env.moveComponent(this, x_to, y_to);
+        replacedComponent = env.moveComponent(this, x_to, y_to, replacedComponent);
     }
 
     public void planDestination(Orientation orientation) {
@@ -68,7 +69,7 @@ public class Robot extends Component {
 
     public void executePlan(GridEnvironment env) {
         if (plannedDestination != null) {
-            env.moveComponent(this, plannedDestination[0], plannedDestination[1]);
+            replacedComponent = env.moveComponent(this, plannedDestination[0], plannedDestination[1], replacedComponent);
             plannedDestination = null;
         }
     }
