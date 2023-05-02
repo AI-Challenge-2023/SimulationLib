@@ -53,6 +53,5 @@ public class SimpleSimulation extends Simulation{
                 }
             }
         });
-        window.refresh();
     }
 }

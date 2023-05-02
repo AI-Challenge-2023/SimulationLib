@@ -10,18 +10,24 @@ import java.util.List;
 
 public class Robot extends Component {
     private static int inc = 1;
-    private static int perceptionRadius = 2;
+    private static int defaultPerceptionRadius = 2;
+    private final int perceptionRadius;
     private Orientation orientation;
     private Component replacedComponent = null;
     private int[] plannedDestination;
 
-    public Robot(int x, int y, Color color) {
+    public Robot(int x, int y, Color color, int perceptionRadius) {
         super(inc++, new Position(x, y), color);
         this.orientation = Orientation.UP;
+        this.perceptionRadius = perceptionRadius;
     }
 
-    public static void setPerceptionRadius(int perceptionRadius) {
-        Robot.perceptionRadius = perceptionRadius;
+    public Robot(int x, int y, Color color) {
+        this(x, y, color, defaultPerceptionRadius);
+    }
+
+    public void changeDefaultPerceptionRadius(int perceptionRadius) {
+        Robot.defaultPerceptionRadius = perceptionRadius;
     }
 
     public Orientation getOrientation() {

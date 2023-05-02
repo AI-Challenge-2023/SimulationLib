@@ -23,4 +23,16 @@ public abstract class Simulation {
     public abstract void addComponent(Component component) throws SimulationException;
     public abstract void removeComponent(Component component);
     public abstract void step();
+
+    public void simulate(int steps, int sleepMillis) {
+        for (int i = 0 ; i < steps ; i++) {
+            step();
+            window.refresh();
+            try {
+                Thread.sleep(sleepMillis);
+            } catch (InterruptedException e) {
+                System.out.println("Failed sleeping for " + sleepMillis + "ms");
+            }
+        }
+    }
 }

@@ -2,6 +2,7 @@ package net.aesten.simulation.environment;
 
 import net.aesten.simulation.component.Air;
 import net.aesten.simulation.component.Component;
+import net.aesten.simulation.component.NonBlockingComponent;
 import net.aesten.simulation.data.Position;
 import net.aesten.simulation.exceptions.SimulationException;
 
@@ -37,7 +38,7 @@ public class GridEnvironment {
         int x = component.getPosition().x();
         int y = component.getPosition().y();
 
-        if (x >= rows || y >= columns || x < 0 || y < 0 || !(grid[x][y] instanceof Air)) {
+        if (x >= rows || y >= columns || x < 0 || y < 0 || !(grid[x][y] instanceof NonBlockingComponent)) {
             throw new SimulationException("Could not add component to simulation env");
         } else {
             grid[x][y] = component;

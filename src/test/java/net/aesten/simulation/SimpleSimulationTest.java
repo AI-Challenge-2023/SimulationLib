@@ -43,10 +43,7 @@ public class SimpleSimulationTest {
         sim.addComponent(o5);
         sim.addComponent(o6);
 
-        for (int s = 0 ; s < 30 ; s++) {
-            sim.step();
-            Thread.sleep(2000);
-        }
+        sim.simulate(30, 1000);
 
     }
 }
