@@ -3,6 +3,7 @@ package net.aesten.simulation.environment;
 import net.aesten.simulation.component.Air;
 import net.aesten.simulation.component.Component;
 import net.aesten.simulation.component.NonBlockingComponent;
+import net.aesten.simulation.component.Robot;
 import net.aesten.simulation.data.Position;
 import net.aesten.simulation.exceptions.SimulationException;
 
@@ -34,7 +35,7 @@ public class GridEnvironment {
         return x_length;
     }
 
-    public Component addComponent(Component component) throws SimulationException {
+    public void addComponent(Component component) throws SimulationException {
         int x = component.getPosition().x();
         int y = component.getPosition().y();
 
@@ -43,9 +44,11 @@ public class GridEnvironment {
         } else if (!(grid[x][y] instanceof NonBlockingComponent)) {
             throw new SimulationException("Tried replacing a blocking component");
         } else {
-            Component previousComponent = grid[x][y];
+            if (component instanceof Robot robot) {
+                Component previousComponent = grid[x][y];
+                robot.setReplacedComponent(previousComponent);
+            }
             grid[x][y] = component;
-            return previousComponent;
         }
     }
 
