@@ -10,24 +10,15 @@ import java.util.List;
 
 public class Robot extends Component {
     private static int inc = 1;
-    private static int defaultPerceptionRadius = 2;
     private final int perceptionRadius;
     private Orientation orientation;
-    private Component replacedComponent = null;
+    private Component currentCellComponent = null;
     private int[] plannedDestination;
 
     public Robot(int x, int y, Color color, int perceptionRadius) {
         super(inc++, new Position(x, y), color);
         this.orientation = Orientation.UP;
         this.perceptionRadius = perceptionRadius;
-    }
-
-    public Robot(int x, int y, Color color) {
-        this(x, y, color, defaultPerceptionRadius);
-    }
-
-    public void changeDefaultPerceptionRadius(int perceptionRadius) {
-        Robot.defaultPerceptionRadius = perceptionRadius;
     }
 
     public Orientation getOrientation() {
@@ -38,8 +29,12 @@ public class Robot extends Component {
         this.orientation = orientation;
     }
 
-    public void setReplacedComponent(Component component) {
-        this.replacedComponent = component;
+    public void setCurrentCellComponent(Component component) {
+        this.currentCellComponent = component;
+    }
+
+    public Component getCurrentCellComponent() {
+        return currentCellComponent;
     }
 
     public void rotateCW() {
@@ -66,7 +61,7 @@ public class Robot extends Component {
     public void moveForward(GridEnvironment env) {
         int x_to = position.x() + orientation.x_dir;
         int y_to = position.y() + orientation.y_dir;
-        replacedComponent = env.moveComponent(this, x_to, y_to, replacedComponent);
+        currentCellComponent = env.moveComponent(this, x_to, y_to, currentCellComponent);
     }
 
     public void planDestination(Orientation orientation) {
@@ -79,12 +74,16 @@ public class Robot extends Component {
 
     public void executePlan(GridEnvironment env) {
         if (plannedDestination != null) {
-            replacedComponent = env.moveComponent(this, plannedDestination[0], plannedDestination[1], replacedComponent);
+            currentCellComponent = env.moveComponent(this, plannedDestination[0], plannedDestination[1], currentCellComponent);
             plannedDestination = null;
         }
     }
 
     public List<Component> perceive(GridEnvironment env) {
-        return env.getComponentsAround(position.x(), position.y(), perceptionRadius);
+        return perceive(env, perceptionRadius);
+    }
+
+    public List<Component> perceive(GridEnvironment env, int radius) {
+        return env.getComponentsAround(position.x(), position.y(), radius);
     }
 }

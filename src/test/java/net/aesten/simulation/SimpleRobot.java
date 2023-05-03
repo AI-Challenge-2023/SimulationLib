@@ -7,7 +7,7 @@ import java.awt.*;
 public class SimpleRobot extends Robot {
     private static Color robotColor = Color.GREEN;
     public SimpleRobot(int x, int y) {
-        super(x, y, robotColor);
+        super(x, y, robotColor, 2);
     }
 
     public static Color getRobotColor() {

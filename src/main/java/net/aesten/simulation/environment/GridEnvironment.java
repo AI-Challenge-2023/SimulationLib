@@ -46,7 +46,7 @@ public class GridEnvironment {
         } else {
             if (component instanceof Robot robot) {
                 Component previousComponent = grid[x][y];
-                robot.setReplacedComponent(previousComponent);
+                robot.setCurrentCellComponent(previousComponent);
             }
             grid[x][y] = component;
         }
