@@ -31,16 +31,17 @@ public class EnvVisualizer {
     public void init() {
         JPanel panel = new JPanel() {
             protected void paintComponent(Graphics g) {
-                int x_ratio = width / EnvVisualizer.this.env.getRows();
-                int y_ratio = height / EnvVisualizer.this.env.getColumns();
+                int cellWidth = width / env.getX_length();
+                int cellHeight = height / env.getY_length();
+                int cellSize = Math.min(cellWidth, cellHeight);
 
                 super.paintComponent(g);
 
-                for (int row = 0; row < EnvVisualizer.this.env.getRows(); ++row) {
-                    for (int col = 0; col < EnvVisualizer.this.env.getColumns(); ++col) {
+                for (int row = 0; row < env.getY_length(); row++) {
+                    for (int col = 0; col < env.getX_length(); col++) {
                         try {
-                            g.setColor(EnvVisualizer.this.env.getComponentAt(row, col).getColor());
-                            g.fillRect(col * x_ratio, row * y_ratio, x_ratio, y_ratio);
+                            g.setColor(env.getComponentAt(col, row).getColor());
+                            g.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
                         } catch (SimulationException e) {
                             e.printStackTrace();
                         }
@@ -49,12 +50,12 @@ public class EnvVisualizer {
             }
 
             public Dimension getPreferredSize() {
-                return new Dimension(EnvVisualizer.this.width, EnvVisualizer.this.height);
+                return new Dimension(width, height);
             }
         };
-        this.window = new JFrame(this.title);
-        this.window.setSize(this.width, this.height + height / this.env.getColumns() + 22);
-        this.window.setLocation(this.window_x, this.window_y);
+        this.window = new JFrame(title);
+        this.window.setSize(width, height + height / env.getX_length() + 22);
+        this.window.setLocation(window_x, window_y);
         this.window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.window.add(panel);
         this.window.setVisible(true);

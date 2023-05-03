@@ -38,6 +38,10 @@ public class Robot extends Component {
         this.orientation = orientation;
     }
 
+    public void setReplacedComponent(Component component) {
+        this.replacedComponent = component;
+    }
+
     public void rotateCW() {
         switch (orientation) {
             case UP -> orientation = Orientation.RIGHT;

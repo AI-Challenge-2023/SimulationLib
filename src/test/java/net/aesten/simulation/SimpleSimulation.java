@@ -21,8 +21,9 @@ public class SimpleSimulation extends Simulation{
 
     @Override
     public void addComponent(Component component) throws SimulationException {
-        env.addComponent(component);
+        Component replacedComponent = env.addComponent(component);
         if (component instanceof Robot robot) {
+            robot.setReplacedComponent(replacedComponent);
             robots.add(robot);
         } else if (component instanceof Obstacle obstacle) {
             obstacles.add(obstacle);

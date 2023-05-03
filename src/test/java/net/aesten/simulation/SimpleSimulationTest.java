@@ -10,12 +10,12 @@ import net.aesten.simulation.visual.EnvVisualizer;
 import java.awt.*;
 
 public class SimpleSimulationTest {
-    public static void main(String[] args) throws SimulationException, InterruptedException {
-        GridEnvironment env = new GridEnvironment(15, 15);
+    public static void main(String[] args) throws SimulationException {
+        GridEnvironment env = new GridEnvironment(15, 20);
         EnvVisualizer window = new EnvVisualizer(env, "Simple Simulation", 200, 100, 500, 500);
         SimpleSimulation sim = new SimpleSimulation(env, window);
 
-        Robot r1 = new SimpleRobot(5, 5);
+        Robot r1 = new SimpleRobot(6, 10);
         Robot r2 = new SimpleRobot(3, 13);
         Robot r3 = new SimpleRobot(10, 5);
         Robot r4 = new SimpleRobot(14, 14);
@@ -43,7 +43,11 @@ public class SimpleSimulationTest {
         sim.addComponent(o5);
         sim.addComponent(o6);
 
-        sim.simulate(30, 1000);
+        for (int i = 3 ; i < 10 ; i++) {
+            Obstacle o = new Obstacle(i, 2, Color.CYAN);
+            sim.addComponent(o);
+        }
 
+        sim.simulate(30, 1000);
     }
 }

@@ -11,42 +11,46 @@ import java.util.List;
 
 public class GridEnvironment {
     private final Component[][] grid;
-    private final int rows;
-    private final int columns;
+    private final int y_length;
+    private final int x_length;
 
     public GridEnvironment(int rows, int columns) {
-        this.rows = rows;
-        this.columns = columns;
-        this.grid = new Component[rows][columns];
+        this.y_length = rows;
+        this.x_length = columns;
+        this.grid = new Component[columns][rows];
 
         for (int i = 0 ; i < rows ; i++) {
             for (int j = 0 ; j < columns ; j++) {
-                grid[i][j] = new Air(i, j);
+                grid[j][i] = new Air(i, j);
             }
         }
     }
 
-    public int getRows() {
-        return rows;
+    public int getY_length() {
+        return y_length;
     }
 
-    public int getColumns() {
-        return columns;
+    public int getX_length() {
+        return x_length;
     }
 
-    public void addComponent(Component component) throws SimulationException {
+    public Component addComponent(Component component) throws SimulationException {
         int x = component.getPosition().x();
         int y = component.getPosition().y();
 
-        if (x >= rows || y >= columns || x < 0 || y < 0 || !(grid[x][y] instanceof NonBlockingComponent)) {
-            throw new SimulationException("Could not add component to simulation env");
+        if (x >= x_length || y >= y_length || x < 0 || y < 0) {
+            throw new SimulationException("Tried to add component outside of simulation range");
+        } else if (!(grid[x][y] instanceof NonBlockingComponent)) {
+            throw new SimulationException("Tried replacing a blocking component");
         } else {
+            Component previousComponent = grid[x][y];
             grid[x][y] = component;
+            return previousComponent;
         }
     }
 
     public boolean isInGrid(int x, int y) {
-        return (x >= 0 && x < rows && y >= 0 && y < columns);
+        return (x >= 0 && x < x_length && y >= 0 && y < y_length);
     }
 
     public Component moveComponent(Component movingComponent, int x_to, int y_to, Component replacedComponent) {
@@ -72,8 +76,8 @@ public class GridEnvironment {
 
     public List<Component> getComponentsAround(int x, int y, int radius) {
         List<Component> components = new ArrayList<>();
-        for (int i = Math.max(0, x - radius) ; i < Math.min(x + radius, rows) ; i++) {
-            for (int j = Math.max(0, y - radius) ; i < Math.min(y + radius, columns) ; i++) {
+        for (int i = Math.max(0, x - radius); i < Math.min(x + radius, x_length) ; i++) {
+            for (int j = Math.max(0, y - radius); i < Math.min(y + radius, y_length) ; i++) {
                 components.add(grid[i][j]);
             }
         }
