@@ -17,20 +17,23 @@ public class SimpleSimulationTest {
 
         Robot r1 = new SimpleRobot(6, 10);
         Robot r2 = new SimpleRobot(3, 13);
-        Robot r3 = new SimpleRobot(10, 5);
-        Robot r4 = new SimpleRobot(14, 14);
+        Robot r3 = new SimpleRobot(10, 4);
+        Robot r4 = new SimpleRobot(10, 8);
 
         r1.setOrientation(Orientation.DOWN);
         r2.setOrientation(Orientation.LEFT);
+        r3.setOrientation(Orientation.DOWN);
+        r4.setOrientation(Orientation.UP);
 
-        r1.setColor(Color.CYAN);
+        r3.setColor(Color.CYAN);
+        r4.setColor(Color.CYAN);
 
         Obstacle o1 = new Obstacle(14,12, Color.YELLOW);
-        Obstacle o2 = new Obstacle(3,5, Color.BLACK);
-        Obstacle o3 = new Obstacle(8,6, Color.RED);
-        Obstacle o4 = new Obstacle(5,7, Color.GRAY);
-        Obstacle o5 = new Obstacle(7,14, Color.PINK);
-        Obstacle o6 = new Obstacle(12,4, Color.BLACK);
+        Obstacle o2 = new Obstacle(3,5, Color.YELLOW);
+        Obstacle o3 = new Obstacle(8,6, Color.YELLOW);
+        Obstacle o4 = new Obstacle(5,7, Color.YELLOW);
+        Obstacle o5 = new Obstacle(7,14, Color.YELLOW);
+        Obstacle o6 = new Obstacle(12,4, Color.YELLOW);
 
         sim.addComponent(r1);
         sim.addComponent(r2);
@@ -44,7 +47,7 @@ public class SimpleSimulationTest {
         sim.addComponent(o6);
 
         for (int i = 3 ; i < 10 ; i++) {
-            Obstacle o = new Obstacle(i, 2, Color.CYAN);
+            Obstacle o = new Obstacle(i, 2, Color.YELLOW);
             sim.addComponent(o);
         }
 

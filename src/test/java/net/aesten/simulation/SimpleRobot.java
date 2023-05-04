@@ -1,6 +1,7 @@
 package net.aesten.simulation;
 
 import net.aesten.simulation.component.Robot;
+import net.aesten.simulation.data.Orientation;
 
 import java.awt.*;
 
@@ -16,5 +17,14 @@ public class SimpleRobot extends Robot {
 
     public static void setRobotColor(Color robotColor) {
         SimpleRobot.robotColor = robotColor;
+    }
+
+    public void rotateCW() {
+        switch (super.orientation) {
+            case UP -> orientation = Orientation.RIGHT;
+            case RIGHT -> orientation = Orientation.DOWN;
+            case DOWN -> orientation = Orientation.LEFT;
+            case LEFT -> orientation = Orientation.UP;
+        }
     }
 }
