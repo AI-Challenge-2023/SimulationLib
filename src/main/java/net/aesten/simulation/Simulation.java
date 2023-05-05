@@ -22,11 +22,11 @@ public abstract class Simulation {
 
     public abstract void addComponent(Component component) throws SimulationException;
     public abstract void removeComponent(Component component);
-    public abstract void step();
+    public abstract void step(int currentStep);
 
     public void simulate(int steps, int sleepMillis) {
         for (int i = 0 ; i < steps ; i++) {
-            step();
+            step(i);
             window.refresh();
             try {
                 Thread.sleep(sleepMillis);

@@ -33,7 +33,7 @@ public class SimpleSimulation extends Simulation{
     }
 
     @Override
-    public void step() {
+    public void step(int currentStep) {
         robots.forEach( robot -> {
             List<Component> components = robot.perceive(env);
             components.forEach( component -> {
