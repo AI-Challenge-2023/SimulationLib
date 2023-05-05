@@ -79,8 +79,8 @@ public class GridEnvironment {
 
     public List<Component> getComponentsAround(int x, int y, int radius) {
         List<Component> components = new ArrayList<>();
-        for (int i = Math.max(0, x - radius); i < Math.min(x + radius, x_length) ; i++) {
-            for (int j = Math.max(0, y - radius); i < Math.min(y + radius, y_length) ; i++) {
+        for (int i = Math.max(0, x - radius); i < Math.min(x + radius + 1, x_length) ; i++) {
+            for (int j = Math.max(0, y - radius); j < Math.min(y + radius + 1, y_length) ; j++) {
                 components.add(grid[i][j]);
             }
         }
