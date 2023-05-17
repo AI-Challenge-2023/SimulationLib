@@ -77,6 +77,10 @@ public class GridEnvironment {
         }
     }
 
+    public Component getComponentAt(Position pos) throws SimulationException {
+        return getComponentAt(pos.x(), pos.y());
+    }
+
     public List<Component> getComponentsAround(int x, int y, int radius) {
         List<Component> components = new ArrayList<>();
         for (int i = Math.max(0, x - radius); i < Math.min(x + radius + 1, x_length) ; i++) {
