@@ -15,6 +15,7 @@ public abstract class Robot extends Component {
     protected final int perceptionRadius;
     protected Orientation orientation;
     protected Component currentCellComponent = null;
+    protected Position previousPosition;
     protected Action plannedAction;
 
     public Robot(int x, int y, Color color, int perceptionRadius) {
@@ -41,6 +42,14 @@ public abstract class Robot extends Component {
 
     public Component getCurrentCellComponent() {
         return currentCellComponent;
+    }
+
+    public Position getPreviousPosition() {
+        return previousPosition;
+    }
+
+    public void setPreviousPosition(Position previousPosition) {
+        this.previousPosition = previousPosition;
     }
 
     public boolean nextCellIsFree(GridEnvironment env) {
@@ -79,5 +88,4 @@ public abstract class Robot extends Component {
     public List<Component> perceive(GridEnvironment env, int radius) {
         return env.getComponentsAround(position.x(), position.y(), radius);
     }
-
 }
