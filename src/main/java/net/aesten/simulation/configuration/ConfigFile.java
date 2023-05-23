@@ -29,4 +29,8 @@ public class ConfigFile {
     public Color getColor(String section, String prop) {
         return Color.decode(this.prefs.node(section).get(prop, null));
     }
+
+    public boolean getBoolean(String section, String prop) {
+        return this.prefs.node(section).getBoolean(prop, false);
+    }
 }
