@@ -10,7 +10,7 @@
 
   <groupId>net.aesten</groupId>
   <artifactId>Simulation</artifactId>
-  <version>1.2.5</version>
+  <version>1.2.6</version>
 
   <dependencies>
     <dependency>

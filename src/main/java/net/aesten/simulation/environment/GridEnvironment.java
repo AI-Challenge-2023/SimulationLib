@@ -69,6 +69,18 @@ public class GridEnvironment {
         return previousComponent;
     }
 
+    public Component replaceComponent(Component toReplace, Component replacing) {
+        int x = toReplace.getPosition().x();
+        int y = toReplace.getPosition().y();
+        if (replacing != null) {
+            grid[x][y] = replacing;
+            replacing.setPosition(toReplace.getPosition());
+            return toReplace;
+        }
+        return null;
+    }
+
+
     public Component getComponentAt(int x, int y) throws SimulationException {
         try {
             return grid[x][y];
