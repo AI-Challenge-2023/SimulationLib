@@ -56,6 +56,10 @@ public class GridEnvironment {
         return (x >= 0 && x < x_length && y >= 0 && y < y_length);
     }
 
+    public boolean isInGrid(Position position) {
+        return isInGrid(position.x(), position.y());
+    }
+
     public Component moveComponent(Component movingComponent, int x_to, int y_to, Component replacedComponent) {
         if (movingComponent.getPosition() == null) return null;
         int x = movingComponent.getPosition().x();
@@ -67,6 +71,10 @@ public class GridEnvironment {
         Component previousComponent = grid[x_to][y_to];
         grid[x_to][y_to] = movingComponent;
         return previousComponent;
+    }
+
+    public Component moveComponent(Component movingComponent, Position position, Component replacedComponent) {
+        return moveComponent(movingComponent, position.x(), position.y(), replacedComponent);
     }
 
     public Component replaceComponent(Component toReplace, Component replacing) {
@@ -101,5 +109,9 @@ public class GridEnvironment {
             }
         }
         return components;
+    }
+
+    public List<Component> getComponentsAround(Position position, int radius) {
+        return getComponentsAround(position.x(), position.y(), radius);
     }
 }
