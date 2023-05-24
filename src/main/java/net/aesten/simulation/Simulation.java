@@ -35,4 +35,8 @@ public abstract class Simulation {
             }
         }
     }
+
+    public void closeWindow() {
+        window.close();
+    }
 }

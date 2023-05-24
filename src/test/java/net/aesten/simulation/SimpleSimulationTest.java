@@ -51,6 +51,7 @@ public class SimpleSimulationTest {
             sim.addComponent(o);
         }
 
-        sim.simulate(30, 1000);
+        sim.simulate(30, 100);
+        sim.closeWindow(); //closes the window at the end, keep if you want to see the end result
     }
 }

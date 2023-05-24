@@ -65,4 +65,8 @@ public class EnvVisualizer {
         this.window.validate();
         this.window.repaint();
     }
+
+    public void close() {
+        this.window.dispose();
+    }
 }
